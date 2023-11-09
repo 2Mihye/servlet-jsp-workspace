@@ -53,3 +53,8 @@
 0:0:0:0:0:0:0:1 - - [09/Nov/2023:17:05:53 +0900] "GET /Product_List/productDetail.jsp?productId=1 HTTP/1.1" 500 2672
 0:0:0:0:0:0:0:1 - - [09/Nov/2023:17:06:14 +0900] "GET /Product_List/productList.jsp HTTP/1.1" 200 1433
 0:0:0:0:0:0:0:1 - - [09/Nov/2023:17:06:16 +0900] "GET /Product_List/productDetail.jsp?productId=1 HTTP/1.1" 500 2690
+127.0.0.1 - - [09/Nov/2023:17:07:17 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [09/Nov/2023:17:07:18 +0900] "GET /Product_List/productList.jsp HTTP/1.1" 200 1433
+0:0:0:0:0:0:0:1 - - [09/Nov/2023:17:07:20 +0900] "GET /Product_List/productDetail.jsp?productId=1 HTTP/1.1" 500 2680
+0:0:0:0:0:0:0:1 - - [09/Nov/2023:17:08:05 +0900] "GET /Product_List/productList.jsp HTTP/1.1" 200 1433
+0:0:0:0:0:0:0:1 - - [09/Nov/2023:17:08:08 +0900] "GET /Product_List/productDetail.jsp?productId=1 HTTP/1.1" 500 2682
