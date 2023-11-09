@@ -1,0 +1,7 @@
+/*@charset "EUC-KR";*/
+h1 {
+	background-color: black;
+	color: white;
+	padding: 10px;
+	text-align: center;
+}
