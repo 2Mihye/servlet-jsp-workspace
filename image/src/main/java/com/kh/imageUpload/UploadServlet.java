@@ -18,13 +18,13 @@ import javax.servlet.http.Part;
 
 
 @WebServlet("/UploadServlet")
-@MultipartConfig // ÆÄÀÏÀ» ¿Ã¸®±â Àü¿¡ ÆÄÀÏ °ªÀ» ¼³Á¤ÇÏ´Â °ø°£
+@MultipartConfig // íŒŒì¼ì„ ì˜¬ë¦¬ê¸° ì „ì— íŒŒì¼ ê°’ì„ ì„¤ì •í•˜ëŠ” ê³µê°„
 /* 
  * @MultipartConfig ( 
- * 					  fileSizeThreshold= 1024 * 1024, // ÆÄÀÏ µ¥ÀÌÅÍ¸¦ µğ½ºÅ©¿¡ ±â·ÏÀ» ½ÃÀÛÇÏ±â Àü¿¡ ¸Ş¸ğ¸®¿¡ º¸À¯µÇ´Â ÃÖ´ë Å©±â(1MB)
- * 					  maxFileSize = 1024 * 1024 * 5, // ¾÷·ÎµåÇÒ ÆÄÀÏÀÇ ÃÖ´ë Å©±â = 1024 * 1024 * 5 (5MB)
- * 					  maxRequestSiz = 1024 * 1024 * 10, // ¿äÃ» µ¥ÀÌÅÍÀÇ ÃÖ´ë Å©±â = 1024 * 1024 * 10 (10MB)
- * 					  location="/tmp" // ÆÄÀÏÀÌ µğ½ºÅ©¿¡ ÀúÀåµÉ ÀÓ½Ã µğ·ºÅÍ¸®
+ * 					  fileSizeThreshold= 1024 * 1024, // íŒŒì¼ ë°ì´í„°ë¥¼ ë””ìŠ¤í¬ì— ê¸°ë¡ì„ ì‹œì‘í•˜ê¸° ì „ì— ë©”ëª¨ë¦¬ì— ë³´ìœ ë˜ëŠ” ìµœëŒ€ í¬ê¸°(1MB)
+ * 					  maxFileSize = 1024 * 1024 * 5, // ì—…ë¡œë“œí•  íŒŒì¼ì˜ ìµœëŒ€ í¬ê¸° = 1024 * 1024 * 5 (5MB)
+ * 					  maxRequestSiz = 1024 * 1024 * 10, // ìš”ì²­ ë°ì´í„°ì˜ ìµœëŒ€ í¬ê¸° = 1024 * 1024 * 10 (10MB)
+ * 					  location="/tmp" // íŒŒì¼ì´ ë””ìŠ¤í¬ì— ì €ì¥ë  ì„ì‹œ ë””ë ‰í„°ë¦¬
  * )
  */
 public class UploadServlet extends HttpServlet {
@@ -34,13 +34,13 @@ public class UploadServlet extends HttpServlet {
 		String jdbcPassword = "KHBANK";
 		
 		/*
-		 String title = request.getParameter("title"); // »ç¿ëÀÚ°¡ ¿äÃ»ÇÑ Æû µ¥ÀÌÅÍ¸¦ Ã³¸®ÇÏ´Â µ¥ »ç¿ëÇÏ´Â ¹®ÀåÀ¸·Î jsp¿¡¼­ titleÀÌ¶ó´Â ÆÄ¶ó¹ÌÅÍ¸¦ °¡Á®¿Í¼­
-		 													titleÀÌ¶ó´Â ¹®ÀÚ¿­ º¯¼ö¿¡ ÀúÀåÇÑ ÈÄ Æû¿¡¼­ ÀÔ·ÂµÈ Á¦¸ñÀ» ³ªÅ¸³¿.
+		 String title = request.getParameter("title"); // ì‚¬ìš©ìê°€ ìš”ì²­í•œ í¼ ë°ì´í„°ë¥¼ ì²˜ë¦¬í•˜ëŠ” ë° ì‚¬ìš©í•˜ëŠ” ë¬¸ì¥ìœ¼ë¡œ jspì—ì„œ titleì´ë¼ëŠ” íŒŒë¼ë¯¸í„°ë¥¼ ê°€ì ¸ì™€ì„œ
+		 													titleì´ë¼ëŠ” ë¬¸ìì—´ ë³€ìˆ˜ì— ì €ì¥í•œ í›„ í¼ì—ì„œ ì…ë ¥ëœ ì œëª©ì„ ë‚˜íƒ€ëƒ„.
 		 */
-		
+		request.setCharacterEncoding("euc-kr");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		Part imagePart = request.getPart("image"); // ÀÌ¹ÌÁö´Â ±ÛÀÚ°¡ ¾Æ´Ï¶ó ÇÈ¼¿·Î ÀÌ·ç¾îÁø part¶ó¼­ Part¸¦ ½á¼­ import ½ÃÄÑ¼­ »ç¿ëÇÔ
+		Part imagePart = request.getPart("image"); // ì´ë¯¸ì§€ëŠ” ê¸€ìê°€ ì•„ë‹ˆë¼ í”½ì…€ë¡œ ì´ë£¨ì–´ì§„ partë¼ì„œ Partë¥¼ ì¨ì„œ import ì‹œì¼œì„œ ì‚¬ìš©í•¨
 		
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
@@ -55,13 +55,13 @@ public class UploadServlet extends HttpServlet {
 			String sql = "INSERT INTO board (board_id, title, content, image, created_at, author)"
 					+ "VALUES (board_sequence.nextval, ?, ?, ?, ?, ?)";
 			//String sql = "INSERT INTO board (board_id, title, content, image, created_at, author)"
-			//		+ "VALUES (½ÃÄö½º ÀÌ¸§.nextval, ?, ?, ?, ?, ?)";
+			//		+ "VALUES (ì‹œí€€ìŠ¤ ì´ë¦„.nextval, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, title);
 			ps.setString(2, content);
 			ps.setBinaryStream(3, imagePart.getInputStream(), (int)imagePart.getSize());
-			ps.setTimestamp(4, new Timestamp(new Date().getTime())); // Date´Â util import / Timestamp´Â sql import
+			ps.setTimestamp(4, new Timestamp(new Date().getTime())); // DateëŠ” util import / TimestampëŠ” sql import
 			ps.setString(5, "author name");
 			ps.executeUpdate();
 		} catch (SQLException e) {

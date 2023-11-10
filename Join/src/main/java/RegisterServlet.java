@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// JDBCºÒ·¯¿À±â
+		// JDBCë¶ˆëŸ¬ì˜¤ê¸°
 		String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
 		String jdbcUsername = "KHBANK";
 		String jdbcPassword = "KHBANK";
@@ -30,7 +30,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		try {
 			Connection connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-			// ³Ö°íÀÚÇÏ´Â DB °ª ¼³Á¤
+			// ë„£ê³ ìí•˜ëŠ” DB ê°’ ì„¤ì •
 			/*
 			 CREATE TABLE MemberInfo (
 			    MNO INT PRIMARY KEY,
@@ -44,7 +44,7 @@ public class RegisterServlet extends HttpServlet {
 			String memail = request.getParameter("memail");
 			String mbirth = request.getParameter("mbirth");
 			
-			// È¸¿ø°¡ÀÔ insert
+			// íšŒì›ê°€ì… insert
 			String sql = "INSERT INTO MemberInfo (MNO, MNAME, MEMAIL,MBIRTH) VALUES (?, ?, ?, ?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, mno);
@@ -55,24 +55,24 @@ public class RegisterServlet extends HttpServlet {
 			preparedStatement.executeUpdate();
 			
 			/* 
-			 * °¡ÀÔ ¼º°øÇÒ °æ¿ì È¸¿ø Á¤º¸¸¦ ¼¼¼Ç¿¡ ÀúÀå
-			 * ¼¼¼Ç °´Ã¼¸¦ ÅëÇØ Å¬¶óÀÌ¾ğÆ®¿Í ¼­¹ö°£¿¡ Àü¼ÛÇÒ µ¥ÀÌÅÍ¸¦ ÀúÀåÇÏ°í °øÀ¯ÇÏ´Â ÀÛ¾÷À» ¼öÇàÇÔ
-			 * request : ÇöÀç Å¬¶óÀÌ¾ğÆ®ÀÇ ¿äÃ»¿¡ ´ëÇÑ Á¤º¸¸¦ Á¦°øÇÏ´Â ¿ªÇÒ
-			 * sessionÀÌ¶õ? À¥ÀÌ³ª ¾ÖÇÃ¸®ÄÉÀÌ¼Ç »óÅÂ¸¦ À¯ÁöÇÏ°í µ¥ÀÌÅÍ¸¦ ÀúÀåÇÏ±â À§ÇØ »ç¿ë
-			 * getSession() : request¿¡¼­ ÇöÀç ¼¼¼ÇÀ» °¡Áö°í ¿È
-			 * setAttribute("mno", mno) : ¼¼¼Ç¿¡ µ¥ÀÌÅÍ¸¦ ÀúÀåÇÏ´Â ¸Ş¼­µå·Î "mno"¶ó´Â ÀÌ¸§À¸·Î µ¥ÀÌÅÍ¸¦ ÀúÀåÇÏ°í mnoº¯¼ö°ªÀÌ ÇØ´ç µ¥ÀÌÅÍ·Î ¼³Á¤µÇµµ·Ï ÇÔ
-			   ÀÌ·¸°Ô ÀúÀåµÈ µ¥ÀÌÅÍ´Â ´Ù¸¥ ¼­ºí¸´ÀÌ³ª jsp ÆäÀÌÁö¿¡¼­ Á¢±ÙÀÌ °¡´ÉÇÔ
+			 * ê°€ì… ì„±ê³µí•  ê²½ìš° íšŒì› ì •ë³´ë¥¼ ì„¸ì…˜ì— ì €ì¥
+			 * ì„¸ì…˜ ê°ì²´ë¥¼ í†µí•´ í´ë¼ì´ì–¸íŠ¸ì™€ ì„œë²„ê°„ì— ì „ì†¡í•  ë°ì´í„°ë¥¼ ì €ì¥í•˜ê³  ê³µìœ í•˜ëŠ” ì‘ì—…ì„ ìˆ˜í–‰í•¨
+			 * request : í˜„ì¬ í´ë¼ì´ì–¸íŠ¸ì˜ ìš”ì²­ì— ëŒ€í•œ ì •ë³´ë¥¼ ì œê³µí•˜ëŠ” ì—­í• 
+			 * sessionì´ë€? ì›¹ì´ë‚˜ ì• í”Œë¦¬ì¼€ì´ì…˜ ìƒíƒœë¥¼ ìœ ì§€í•˜ê³  ë°ì´í„°ë¥¼ ì €ì¥í•˜ê¸° ìœ„í•´ ì‚¬ìš©
+			 * getSession() : requestì—ì„œ í˜„ì¬ ì„¸ì…˜ì„ ê°€ì§€ê³  ì˜´
+			 * setAttribute("mno", mno) : ì„¸ì…˜ì— ë°ì´í„°ë¥¼ ì €ì¥í•˜ëŠ” ë©”ì„œë“œë¡œ "mno"ë¼ëŠ” ì´ë¦„ìœ¼ë¡œ ë°ì´í„°ë¥¼ ì €ì¥í•˜ê³  mnoë³€ìˆ˜ê°’ì´ í•´ë‹¹ ë°ì´í„°ë¡œ ì„¤ì •ë˜ë„ë¡ í•¨
+			   ì´ë ‡ê²Œ ì €ì¥ëœ ë°ì´í„°ëŠ” ë‹¤ë¥¸ ì„œë¸”ë¦¿ì´ë‚˜ jsp í˜ì´ì§€ì—ì„œ ì ‘ê·¼ì´ ê°€ëŠ¥í•¨
 			*/
 			request.getSession().setAttribute("mno", mno);
 			request.getSession().setAttribute("mname", mname);
 			request.getSession().setAttribute("memail", memail);
 			request.getSession().setAttribute("mbirth", mbirth);
 			
-			// ¼º°øÇÒ °æ¿ì ÀÌµ¿ÇÒ ÆäÀÌÁö ¼³Á¤ÇØÁÖ°í ´Ù½Ã Àü¼Û
+			// ì„±ê³µí•  ê²½ìš° ì´ë™í•  í˜ì´ì§€ ì„¤ì •í•´ì£¼ê³  ë‹¤ì‹œ ì „ì†¡
 			response.sendRedirect("register_success.jsp");
 			
 		} catch (SQLException e) {
-			// ½ÇÆĞÇÒ °æ¿ì ÀÌµ¿ÇÒ ÆäÀÌÁö ¼³Á¤
+			// ì‹¤íŒ¨í•  ê²½ìš° ì´ë™í•  í˜ì´ì§€ ì„¤ì •
 			response.sendRedirect("register_error.jsp");
 			e.printStackTrace();
 		}
