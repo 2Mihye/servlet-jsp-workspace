@@ -9,3 +9,5 @@ C:\Users\user1\servlet-jsp-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core
 \image\src\main\java
 C:\Users\user1\servlet-jsp-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2950269715.index
 \Product_List\src\main\java
+C:\Users\user1\servlet-jsp-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3755937873.index
+\PaginationDAO\src\main\java
