@@ -79,4 +79,29 @@ public class ProductDAO {
 		
 		return product;
 	}
+	
+	// 업데이트를 하기 위한 쿼리문 추가
+	public void updateProduct(Product product) {
+		String updateProductSQL = "UPDATE products SET product_name=?, category=?, price=?, stock_quantity=? WHERE product_id=?";
+		try {
+			Connection conn = DriverManager.getConnection(jdbcURL, userName, password);
+			PreparedStatement ps = conn.prepareStatement(updateProductSQL);
+			ps.setString(1, product.getProductName());
+			ps.setString(2, product.getCategory());
+			ps.setDouble(3, product.getPrice());
+			ps.setInt(4, product.getStockQuantity());
+			ps.setInt(5, product.getProductID());
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
+
+
+
+	}
 }

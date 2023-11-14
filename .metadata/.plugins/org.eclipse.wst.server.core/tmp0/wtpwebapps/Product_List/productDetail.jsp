@@ -19,7 +19,11 @@
 			Product product = productDao.getProductID(productID);
 		%>
 		<p>제품 ID : <%=product.getProductID() %></p>
-		
+		<p>제품명 : <%=product.getProductID() %></p>
+		<p>카테고리 : <%=product.getProductID() %></p>
+		<p>가격 : <%=product.getProductID() %></p>
+		<p>지고 수량 : <%=product.getProductID() %></p>
+		<a href="update_product.jsp?productID=<%=product.getProductID()%>">제품 수정하기</a>
 	</body>
 	
 	
