@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,11 +98,52 @@ public class ProductDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	
+	
+	// 댓글을 추가하는 DB insert문
+	public void addComment(ProductComment comment) {
+		try {
+			Connection connection = DriverManager.getConnection(jdbcURL, userName, password);
+			 String sql = "INSERT INTO product_comments (comment_id, product_id, commenter_name, comment_text, comment_date) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)";
+			 PreparedStatement ps = connection.prepareStatement(sql);
+			 ps.setInt(1, comment.getCommentID());
+			 ps.setInt(2, comment.getProductID());
+			 ps.setString(3, comment.getCommenterName());
+			 ps.setString(4, comment.getCommentText());
+			 ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	// 댓글 전체 출력하는 메서드
+	public ArrayList<ProductComment> getCommentByProductID(int productID){
+		ArrayList<ProductComment> commentList = new ArrayList<>();
+		try {
+			Connection connection = DriverManager.getConnection(jdbcURL, userName, password);
+			String sql = "SELECT * FROM product_comments WHERE product_id = ?";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, productID);
+			ResultSet resultSet = ps.executeQuery();
+			
+			while(resultSet.next()) {
+				int commentID = resultSet.getInt("comment_id");
+				String commenterName = resultSet.getString("commenter_name");
+				String commentText = resultSet.getString("comment_text");
+				Timestamp commentDate = resultSet.getTimestamp("comment_date");
+				
+				ProductComment comment = new ProductComment(commentID, productID, commenterName, commentText, commentDate);
+				commentList.add(comment);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-
-
-
-
-
+		return commentList;
+		
 	}
 }
